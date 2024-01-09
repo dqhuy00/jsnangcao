@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let x;
+
+            const arr = [28, 38, 44, 29, 109];
+
+            // push() -  thêm một hoặc nhiều phần tử vào cuối mảng v
+            arr.push(100);
+
+            // pop() - xóa phần tử cuối cùng khỏi mảng 
+            arr.pop(arr);
+          
+            // unshift() - thêm một giá trị vào đầu mảng 
+            arr.unshift(99);
+
+            // shift() - xóa giá trị đầu tiên khỏi một mảng
+            arr.shift();
+
+            // reverse() - đảo ngược một mảng 
+            arr.reverse();
+
+            // includes() - kiểm tra xem một giá trị có tồn tại trong một mảng hay không 
+            x = arr.includes(445);
+
+            // indexOf() -trả về chỉ số (index) của phần tử đầu tiên khớp trong một mảng 
+            x = arr.indexOf(28);
+
+            // Return array as a string
+            x = arr.toString();
+            x = arr.join();
+
+            // slice() returns selected elements in an array, as a new array. Slice takes in the index of the first element and the index of the last element to be included in the new array.
+            x = arr.slice(1, 4);
+
+            // splice() works like slice() except it takes the index of the first element and the number of elements after that as a second argument. it also mutates the original array where slice() does not
+            x = arr.splice(1, 4);
+
+            // Remove a single element/value - The following will mutate the original array by taking out the element with the index of 4. x will be equal to a new array with that plucked out value.
+            x = arr.splice(4, 1);
+
+            // Chaining methods - Some methods can be chained depending on the return value.
+            x = arr.slice(1, 4).reverse().toString().charAt(0);
+
+            console.log(x);
+    </script>
+</body>
+</html>
