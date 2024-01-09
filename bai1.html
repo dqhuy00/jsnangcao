@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //destructuring array là một cú pháp cho phép bạn tách lấy các giá trị 
+
+        const nhahang = {
+            ten:'huydang',
+            diachi: 'dong anh',
+            menuchinh: ['nau', 'den','ame'],
+            menuphu:['pho' ,'bun' ,'com'],
+            order : function(startindex,mainindex ){
+                return [this.menuchinh[startindex],this.menuphu[mainindex]];
+
+            }
+        };
+        // 
+          const [start ,main]=nhahang.order(2,1);
+          console.log(start,main);
+       /* 
+       const arr = [2, 3, 4];
+        const a = arr[0];
+        const b = arr[1];
+        const c = arr[2];
+
+        const [ x ,y ,z] = arr;
+        console.log(x,y,z);
+        */
+        // const [t1,t2] = nhahang.menuchinh;// lấy phần tử t1 và t2 trong mảng menu
+        // console.log(t1,t2);//nau den
+
+        // const [first,,second] =nhahang.menuchinh;//lấy pt 1 và 3
+        // console.log(first,second);//nau ame
+
+     
+        
+        
+    </script>
+</body>
+
+</html>
+
+</html>
