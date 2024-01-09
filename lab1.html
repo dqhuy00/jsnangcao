@@ -1,0 +1,58 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            // Dữ liệu lấy từ API
+                const game = {
+                    team1: 'Bayern Munich',
+                    team2: 'Borussia Dortmund',
+                    players: [
+                        ['Neuer', 'Pavard', 'Martinez', 'Alaba', 'Davies', 'Kimmich', 'Goretzka', 'Coman', 'Muller', 'Gnarby', 'Lewandowski'],
+                        ['Burki', 'Schulz', 'Hummels', 'Akanji', 'Hakimi', 'Weigl', 'Witsel', 'Hazard', 'Brandt', 'Sancho', 'Gotze'],
+                    ],
+                    score: '4:0',
+                    scored: ['Lewandowski', 'Gnarby', 'Lewandowski', 'Hummels'],
+                    date: 'Nov 9th, 2037',
+                    odds: {
+                        team1: 1.33,
+                        x: 3.25,
+                        team2: 6.5,
+                    },
+                };
+
+                // Nhiệm vụ 1: Tạo mảng cầu thủ cho mỗi đội
+                const [players1, players2] = game.players;
+
+                // Nhiệm vụ 2: Tạo mảng cầu thủ và thủ môn cho mỗi đội
+                const [gk, ...fieldPlayers] = players1;
+
+                // Nhiệm vụ 3: Tạo mảng allPlayers bao gồm toàn bộ 22 cầu thủ
+                const allPlayers = [...players1, ...players2];
+
+                // Nhiệm vụ 4: Tạo mảng players1Final với các cầu thủ ban đầu và các cầu thủ thay người
+                const players1Final = [...players1, 'Thiago', 'Coutinho', 'Perisic'];
+
+                // Nhiệm vụ 5: Tạo biến tỉ lệ kết quả trận đấu
+                const { team1, x: draw, team2 } = game.odds;
+
+                // Nhiệm vụ 6: In ra tên cầu thủ đã ghi bàn
+                const printGoals = (...players) => {
+                    console.log(`${players.length} goals were scored`);
+                    for (const player of players) {
+                        console.log(player);
+                    }
+                };
+
+                printGoals(...game.scored);
+
+                // Nhiệm vụ 7: In ra đội chiến thắng mà không sử dụng if/else hoặc toán tử 3 ngô
+                team1 < team2 && console.log('Team 1 wins!');
+                team1 > team2 && console.log('Team 2 wins!');
+        </script>
+    </body>
+    </html>
