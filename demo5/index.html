@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+  <head>
+    <title>Quản lý sinh viên</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.7.9/angular.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css"
+    />
+  </head>
+  <body>
+    <div ng-controller="myCtrl" class="container">
+      <h2>Quản lý sinh viên</h2>
+
+      <form class="form-inline">
+        <div class="form-group">
+          <label for="name">Họ tên:</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            ng-model="inputName"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="date">Ngày sinh:</label>
+          <input
+            type="text"
+            id="date"
+            class="form-control"
+            ng-model="inputDate"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="score">Điểm số:</label>
+          <input
+            type="text"
+            id="score"
+            class="form-control"
+            ng-model="inputScore"
+            required
+          />
+        </div>
+
+        <button
+          class="btn btn-primary"
+          ng-click="addStudent()"
+          ng-disabled="!inputName || !inputDate || !inputScore"
+        >
+          {{ editMode ? 'Cập nhật' : 'Thêm' }}
+        </button>
+        <button class="btn btn-default" ng-click="clearForm()">Hủy</button>
+      </form>
+
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Họ tên</th>
+            <th>Ngày sinh</th>
+            <th>Điểm số</th>
+            <th>Xếp hạng</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="student in students">
+            <td>{{ student.fullname }}</td>
+            <td>{{ student.birthday }}</td>
+            <td>{{ student.mark }}</td>
+            <td>{{ getRanking(student.mark) }}</td>
+            <td>
+              <a href="#" ng-click="editStudent(student)">Sửa</a>
+              <a href="#" ng-click="confirmDelete(student)">Xóa</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <script>
+      angular.module("myApp", []).controller("myCtrl", function ($scope) {
+        $scope.students = [];
+        $scope.editMode = false;
+        $scope.currentIndex = null;
+
+        $scope.addStudent = function () {
+          if ($scope.editMode) {
+            // Cập nhật sinh viên đã tồn tại
+            $scope.students[$scope.currentIndex].fullname = $scope.inputName;
+            $scope.students[$scope.currentIndex].birthday = $scope.inputDate;
+            $scope.students[$scope.currentIndex].mark = $scope.inputScore;
+            $scope.editMode = false;
+            $scope.currentIndex = null;
+          } else {
+            // Thêm sinh viên mới
+            var student = {
+              fullname: $scope.inputName,
+              birthday: $scope.inputDate,
+              mark: $scope.inputScore,
+            };
+            $scope.students.push(student);
+          }
+          $scope.clearForm();
+        };
+
+        $scope.editStudent = function (student) {
+          $scope.inputName = student.fullname;
+          $scope.inputDate = student.birthday;
+          $scope.inputScore = student.mark;
+          $scope.editMode = true;
+          $scope.currentIndex = $scope.students.indexOf(student);
+        };
+
+        $scope.clearForm = function () {
+          $scope.inputName = "";
+          $scope.inputDate = "";
+          $scope.inputScore = "";
+        };
+
+        $scope.confirmDelete = function (student) {
+          var result = confirm("Bạn có chắc chắn muốn xóa sinh viên này?");
+          if (result) {
+            var index = $scope.students.indexOf(student);
+            $scope.students.splice(index, 1);
+          }
+        };
+
+        $scope.getRanking = function (score) {
+          if (score < 5) {
+            return "Trung bình";
+          } else {
+            return "Khá";
+          }
+        };
+      });
+    </script>
+  </body>
+</html>
